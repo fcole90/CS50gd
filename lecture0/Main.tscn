@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Ball/Ball.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Main.gd" type="Script" id=2]
+[ext_resource path="res://Paddle/Paddle.tscn" type="PackedScene" id=3]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Ball" parent="." instance=ExtResource( 1 )]
+speed = 200
+
+[node name="LeftPaddle" parent="." instance=ExtResource( 3 )]
+speed = 250
+
+[node name="RightPaddle" parent="." instance=ExtResource( 3 )]
+speed = 250
