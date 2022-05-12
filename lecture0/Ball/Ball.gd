@@ -1,17 +1,17 @@
 extends Area2D
 class_name Ball
 
-export var speed = 10
+export var speed = 500
 onready var sprite: Sprite = $Sprite
-onready var viewport: Rect2 = get_viewport_rect()
 
-var direction_angle = rand_range(0, 1) #deg2rad(180 - 22)
-var current_direction = Vector2(cos(direction_angle), sin(direction_angle))
+var direction_angle = 0
+var current_direction = Vector2.RIGHT
 
 func set_random_direction():
-	direction_angle = rand_range(0, 1) #deg2rad(180 - 22)
+	direction_angle = rand_range(deg2rad(-45), deg2rad(45))
 	current_direction = Vector2(cos(direction_angle), sin(direction_angle))
-
+	if randf() > 0.5:
+		reflectX()
 
 func get_rect() -> Rect2:
 	var sprite_rect = sprite.get_rect()
@@ -31,7 +31,7 @@ func collides(rect: Rect2) -> bool:
 	return true
 
 func move(direction: Vector2, delta: float):
-	position += direction * speed * delta
+	position += direction.normalized() * speed * delta
 
 func setScale(x: int):
 	sprite.scale = Vector2(x, x)
@@ -39,12 +39,9 @@ func setScale(x: int):
 func reflectX():
 	current_direction.x = -current_direction.x
 
+func reflectY():
+	current_direction.y = -current_direction.y
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float):
-	# Reflect horizontally
-#	if (position.x <= 0 or position.x >= viewport.size.x):
-#		reflectX()
-	# Reflect vertically
-	if (position.y <= 0 or position.y >= viewport.size.y):
-		current_direction.y = -current_direction.y
 	move(current_direction, delta)

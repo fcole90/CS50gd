@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Ball/Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
 [ext_resource path="res://Paddle/Paddle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/pong_sounds_paddle_hit.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/pong_sounds_wall_hit.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/pong_sounds_score.wav" type="AudioStream" id=6]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 2 )
@@ -15,3 +18,12 @@ speed = 250
 
 [node name="RightPaddle" parent="." instance=ExtResource( 3 )]
 speed = 250
+
+[node name="PaddleSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="ScoreSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="WallHitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )

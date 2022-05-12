@@ -6,6 +6,7 @@
 [node name="Paddle" type="Area2D"]
 position = Vector2( 5, 50 )
 script = ExtResource( 2 )
+speed = 20
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 1, 8 )

@@ -1,7 +1,7 @@
 extends Area2D
 class_name Paddle
 
-export var speed = 10
+export var speed = 50
 onready var sprite: Sprite = $Sprite
 onready var viewport: Rect2 = get_viewport_rect()
 
@@ -17,9 +17,15 @@ func setScale(x: int):
 	var xy_ratio = sprite.scale.y / sprite.scale.x
 	sprite.scale = Vector2(x, x * xy_ratio)
 
+func move(direction: Vector2, delta):
+	var movement = direction.y * speed * delta
+	if (
+		# Allow only DOWN at top, only UP at bottom
+		(get_rect().position.y > 0 or direction == Vector2.DOWN) and
+		(get_rect().end.y < viewport.end.y or direction == Vector2.UP)
+	):
+		position.y += movement
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if (Input.is_action_pressed("ui_up") and get_rect().position.y > 0):
-		position.y -= speed * delta
-	if (Input.is_action_pressed("ui_down") and get_rect().end.y < viewport.end.y):
-		position.y += speed * delta
+	pass
